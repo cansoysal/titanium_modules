@@ -93,7 +93,7 @@
 	gravity.Set(0.0f, -9.81f); 
 	
 	// Construct a world object, which will hold and simulate the rigid bodies.
-	world = new b2World(gravity, false); //TODO: make configurable sleep
+	world = new b2World(gravity, true);
 	world->SetContinuousPhysics(true);
 	
 	if (contactListener)
@@ -211,6 +211,10 @@
 		// Tell the physics world to create the body
 		b2Body *body = world->CreateBody(&bodyDef);
 
+		// object can sleep
+		bodyDef.allowSleep = true;
+		bodyDef.awake = true;
+		
 		// Define the dynamic body fixture.
 		b2FixtureDef fixtureDef;
 		
